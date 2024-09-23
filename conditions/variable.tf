@@ -7,6 +7,11 @@
   #terraform plan
 #4. Env variables
    #terraform plan
+variable "instance_name" {
+    type = string
+    default = "mongodb"
+  
+}
 variable "ami_id" {
   type = string
   default = "ami-0b4f379183e5706b9"
