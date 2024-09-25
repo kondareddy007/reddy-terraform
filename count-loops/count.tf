@@ -1,5 +1,6 @@
 resource "aws_instance" "web"{
     #count = 11 # count.index is a special variable provided by terraform
+    #count = var.instance_name
     count = length(var.instance_name)
     ami = var.ami_id
     instance_type = var.instance_name[count.index] == "mongodb" || var.instance_name[count.index] == "mysql" || var.instance_name[count.index] == "shipping" ? "t2.small" : "t2.micro"
