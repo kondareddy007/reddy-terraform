@@ -1,0 +1,52 @@
+pipeline {
+    // agent none
+    agent {
+        node {
+            label 'AGENT'
+        }
+    }
+    
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
+    
+    stages {
+        stage('init'){
+            input {
+                message "Should we connect?"
+                ok "Yes, Thanks"
+                
+             }
+            steps{
+                echo "terraform init"
+                terraform init                
+            }
+
+        }
+        stage('Plan'){
+            steps{
+                echo "This is terraform plan"
+                terraform plan
+            }
+        }
+        stage('apply'){
+            steps{
+                echo 'This is terraform apply'
+                terraform apply -auto-generate
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'it will always say hello again'
+        }
+        failure {
+            echo " it will throw error message when build is failed"
+        }
+        success {
+            echo "it will display when build when build is success"
+        }
+    }
+}
