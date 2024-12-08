@@ -48,7 +48,7 @@ pipeline {
         }
         stage('apply'){
             when {
-                ${params.action} == 'apply'
+                params.action == 'apply'
             }
             steps{
                 sh """
@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Destroy'){
             when {
-                ${params.action} == 'destroy'
+                pparams.action == 'destroy'
             }
             input {
                     message "Should we continue for destroy"
