@@ -10,6 +10,9 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
+    parameters {
+        booleanParams(name: skip_test, defaultValue: false, description: 'set to true to skip the test stage')
+    }
     
     stages {
         stage('init'){
@@ -17,6 +20,9 @@ pipeline {
                 message "Should we connect?"
                 ok "Yes, Thanks"
                 
+             }
+             when {
+                expression { params.skip_test != true }
              }
             steps{
                 echo "terraform init"
@@ -29,6 +35,7 @@ pipeline {
 
         }
         stage('Plan'){
+            
             steps{
                 echo "This is terraform plan"
                 sh """
@@ -80,4 +87,5 @@ pipeline {
 
 //Errors
 //MissingPropertyException: No such property: init for class 
-//Sol: we have to install terraform and aws cli in AGENT server
+//Solu: we have to install terraform and aws cli in AGENT server
+// after it will run Jenkins file properly without failure.
