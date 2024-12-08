@@ -1,9 +1,5 @@
 resource "aws_instance" "web"{
+    ami = "ami-0b4f379183e5706b9"
+    instance_type = "t2.small"
     
-    for_each = var.instance_name
-    ami = var.ami_id
-    instance_type = each.value
-    tags = {
-      Name = each.key
-    }
 }
