@@ -20,9 +20,10 @@ pipeline {
              }
             steps{
                 echo "terraform init"
-                sh """"
+                sh """
                 cd ec2
                 terraform init  
+
                 """              
             }
 
@@ -33,6 +34,7 @@ pipeline {
                 sh """
                 cd ec2
                 terraform plan
+
                 """
             }
         }
@@ -42,6 +44,7 @@ pipeline {
                 echo 'This is terraform apply'
                 cd ec2
                 terraform apply -auto-generate
+                
                 """
             }
         }
