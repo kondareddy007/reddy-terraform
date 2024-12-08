@@ -11,6 +11,8 @@ pipeline {
         disableConcurrentBuilds()
     }
     parameters {
+        
+        choice (name: 'action', choices: ['apply', 'destroy'], description: 'pick any one')
         booleanParam(name: 'skip_test', defaultValue: false, description: 'set to true to skip the test stage')
     }
     
@@ -45,6 +47,9 @@ pipeline {
             }
         }
         stage('apply'){
+            when {
+                ${params.action} == 'apply'
+            }
             steps{
                 sh """
                 echo 'This is terraform apply'
@@ -55,6 +60,9 @@ pipeline {
             }
         }
         stage('Destroy'){
+            when {
+                ${params.action} == 'destroy'
+            }
             input {
                     message "Should we continue for destroy"
                     ok "Yes, Thanks"
