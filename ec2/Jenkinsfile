@@ -58,7 +58,7 @@ pipeline {
                 sh """
                  echo "This is destroy the instances"
                  cd ec2
-                 terraform deploy
+                 terraform destroy
                 """
             }
         }
