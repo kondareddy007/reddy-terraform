@@ -51,7 +51,7 @@ pipeline {
         stage('Destroy'){
             input{
                     message "Should we continue for destroy"
-                    Ok "Yes, Thanks"
+                    ok "Yes, Thanks"
 
                 }
             steps{
