@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Destroy'){
             when {
-                pparams.action == 'destroy'
+                params.action == 'destroy'
             }
             input {
                     message "Should we continue for destroy"
