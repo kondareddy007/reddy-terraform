@@ -43,8 +43,22 @@ pipeline {
                 sh """
                 echo 'This is terraform apply'
                 cd ec2
-                terraform apply -auto-generate
-                
+                terraform apply -auto-approve
+
+                """
+            }
+        }
+        stage('Destroy'){
+            input{
+                    message "Should we continue for destroy"
+                    Ok "Yes, Thanks"
+
+                }
+            steps{
+                sh """
+                 echo "This is destroy the instances"
+                 cd ec2
+                 terraform deploy
                 """
             }
         }
