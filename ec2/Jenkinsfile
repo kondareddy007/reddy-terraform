@@ -20,20 +20,29 @@ pipeline {
              }
             steps{
                 echo "terraform init"
-                terraform init                
+                sh """"
+                cd ec2
+                terraform init  
+                """              
             }
 
         }
         stage('Plan'){
             steps{
                 echo "This is terraform plan"
+                sh """
+                cd ec2
                 terraform plan
+                """
             }
         }
         stage('apply'){
             steps{
+                sh """
                 echo 'This is terraform apply'
+                cd ec2
                 terraform apply -auto-generate
+                """
             }
         }
     }
@@ -50,3 +59,8 @@ pipeline {
         }
     }
 }
+
+
+//Errors
+//MissingPropertyException: No such property: init for class 
+//Sol: we have to install terraform and aws cli in AGENT server
